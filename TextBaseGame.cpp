@@ -28,7 +28,8 @@ struct Player {
 	string rank;
 };
 
-const string gameTitle = R"(
+//Game title + logo
+const char* gameTitle = R"(
                  : .::;;;;;+XX:    :$&&&&&&&&&&&&&&&&&&$+.                 .....   .+xx: ....  .+::::.:::: :.+$$x.    ;XXX$:....:;$$$$$$$$$$XX$Xx;;;;;+xX$&&&&&&&&&&&&$$$$$$$$$$$$$$XXXx+;;;+xX$&&&        
                    .:::;;;.  :x&&&&&&&&&&&&&&&&&&&&&&&&x:                         ... +xx:. ;:;+X+:::::;;x++;;$$$$.     +$$$+...;XXXXXXXXXx;;;;;;+;    ;$$$$&&&&&&&&&&&&&&&&&$$$$$$$$$$$XXXXXX$$$&&        
                    .:;;;  x$$$$$$$&$$&&&&&&&&&&&&&$$$&&&;.                             +XXX+:x+$$$xX:+++x$$X+$$$&&&:      X$X$;:$XxxxXXxxx+:..;+XX$X..;$$$&&&&&&&&&&&&&&&&&&&&&&&&$$$$$$$$$$$$$$&&&        
@@ -83,15 +84,29 @@ const string gameTitle = R"(
                                            .   :+  x$&&&&&&&&&&&&&;       x .:++::  .;x$;   :.X xxxX$X:.::+x    +$x:;+x$$$$&&&&&&&&&x$x&&$$$$$$$XXxxx+; +x;        .;+xxXXXX$$$$&&&&&$$$$&$$X;X$$$$        
                                       .   ;   ..:.  .X&&&&&&&&&&&&&X     .:  .  ...  :x$+  :+XX .;;;x;    +x; .:+$x.;+X&&X+$$$&&&&$&xX&&&$$$$XXXXxx;     ...:+       ...+xXXX$xX$$&&&&&$$$$$&&X+X$$        
 
-    :::       ::: :::::::::: :::        :::           ::::::::   ::::::::    :::   :::   ::::::::::      ::::::::::: ::::::::      ::::::::::: :::    ::: ::::::::::              :::     :::::::::  :::   :::  ::::::::   :::::::: 
-   :+:       :+: :+:        :+:        :+:          :+:    :+: :+:    :+:  :+:+: :+:+:  :+:                 :+:    :+:    :+:         :+:     :+:    :+: :+:                   :+: :+:   :+:    :+: :+:   :+: :+:    :+: :+:    :+: 
-  +:+       +:+ +:+        +:+        +:+          +:+        +:+    +:+ +:+ +:+:+ +:+ +:+                 +:+    +:+    +:+         +:+     +:+    +:+ +:+                  +:+   +:+  +:+    +:+  +:+ +:+  +:+        +:+         
- +#+  +:+  +#+ +#++:++#   +#+        +#+          +#+        +#+    +:+ +#+  +:+  +#+ +#++:++#            +#+    +#+    +:+         +#+     +#++:++#++ +#++:++#            +#++:++#++: +#++:++#+    +#++:   +#++:++#++ +#++:++#++   
-+#+ +#+#+ +#+ +#+        +#+        +#+          +#+        +#+    +#+ +#+       +#+ +#+                 +#+    +#+    +#+         +#+     +#+    +#+ +#+                 +#+     +#+ +#+    +#+    +#+           +#+        +#+    
-#+#+# #+#+#  #+#        #+#        #+#          #+#    #+# #+#    #+# #+#       #+# #+#                 #+#    #+#    #+#         #+#     #+#    #+# #+#                 #+#     #+# #+#    #+#    #+#    #+#    #+# #+#    #+#     
-###   ###   ########## ########## ##########    ########   ########  ###       ### ##########          ###     ########          ###     ###    ### ##########          ###     ### #########     ###     ########   ########       
+                                                        ::::::::::: :::    ::: ::::::::::              :::     :::::::::  :::   :::  ::::::::   :::::::: 
+                                                           :+:     :+:    :+: :+:                   :+: :+:   :+:    :+: :+:   :+: :+:    :+: :+:    :+: 
+                                                          +:+     +:+    +:+ +:+                  +:+   +:+  +:+    +:+  +:+ +:+  +:+        +:+         
+                                                         +#+     +#++:++#++ +#++:++#            +#++:++#++: +#++:++#+    +#++:   +#++:++#++ +#++:++#++   
+                                                        +#+     +#+    +#+ +#+                 +#+     +#+ +#+    +#+    +#+           +#+        +#+    
+                                                       #+#     #+#    #+# #+#                 #+#     #+# #+#    #+#    #+#    #+#    #+# #+#    #+#     
+                                                      ###     ###    ### ##########          ###     ### #########     ###     ########   ########       
                                                                                                                                                                                     
 )";
+
+//Short story
+const char* story = R"(You are an adventurer in a vast world where dungeons hold untold treasures and unspeakable horrors. For years, whispers have circulated about the Abyss dungeon, a place where the earth itself seems to tremble, and the very darkness devours all light. No one has ever returned from its depths, but that has never stopped those daring enough to seek glory and power.
+
+You've trained for this moment your entire life, honing your skills as a warrior, mastering the use of Divine Art, and preparing to face whatever the Abyss throws at you. Your goal is simple: Enter the dungeon, face its horrors, and slay the Overlord an ancient being so powerful that even the gods tremble in fear at the thought of it.
+
+As you stand before the entrance, the dungeon great stone door slowly creaks open, as if it has been waiting for you. The air is thick with the scent of decay, and an unnatural chill hangs in the air.)";
+
+//The Overlord speaks
+const char* bossSpeak = R"(Foolish mortal, you think your light will save you? It will flicker and die, just like the others.)";
+
+//Player dialog
+const char* playerWin = R"(The light will never die, and neither will I.)";
+
 
 // Function declarations
 void mainMenu(Player& player, Weapon& dagger, Weapon& sword, Weapon& bow);
@@ -117,9 +132,11 @@ int main() {
 	player.money = 100;
 	player.energy = 100;
 
+	system("Color 0C");
 
 	cout << gameTitle << endl;
-	cout << "What is your name? ";
+	cout << story << endl;
+	cout << "\nWhat is your name? ";
 	cin >> player.name;
 	player.rank = "BRONZE";
 
@@ -132,9 +149,9 @@ int main() {
 // Display player info
 void displayPlayerInfo(Player& player, Weapon& dagger, Weapon& sword, Weapon& bow) {
 	cout << "Name: " << player.name << ". Health: " << player.health << ". Money: " << player.money << " dollars. Energy: " << player.energy << "\n";
-	if (dagger.equipped) cout << "Weapon: DAGGER\n";
-	if (sword.equipped) cout << "Weapon: SWORD\n";
-	if (bow.equipped) cout << "Weapon: BOW\n";
+	if (dagger.equipped) cout << "\nWeapon: DAGGER\n";
+	if (sword.equipped) cout << "\nWeapon: SWORD\n";
+	if (bow.equipped) cout << "\nWeapon: BOW\n";
 
 	cout << "\nAdventure Rank: " << player.rank;
 	cout << "\n\n1) Go to Store\n2) Rest\n3) Fight\n\nAction: ";
@@ -174,27 +191,27 @@ void mainMenu(Player& player, Weapon& dagger, Weapon& sword, Weapon& bow) {
 
 		// Promotions based on money(requirement for boss fight)
 		if (player.money >= 500 && player.rank == "BRONZE") {
-			cout << "You have been promoted to SILVER rank adventure!\n";
+			cout << "You have been promoted to SILVER rank adventure!\n\n";
 			player.rank = "SILVER";
 			Sleep(1600);
 		}
 		if (player.money >= 1000 && player.rank == "SILVER") {
-			cout << "You have been promoted to GOLD rank adventure!\n";
+			cout << "You have been promoted to GOLD rank adventure!\n\n";
 			player.rank = "GOLD";
 			Sleep(1600);
 		}
 		if (player.money >= 3000 && player.rank == "GOLD") {
-			cout << "You have been promoted to PLATINIUM rank adventure!\n";
+			cout << "You have been promoted to PLATINIUM rank adventure!\n\n";
 			player.rank = "PLATINIUM";
 			Sleep(1600);
 		}
 		if (player.money >= 5000 && player.rank == "PLATINIUM") {
-			cout << "You have been promoted to MYTHRIL rank adventure!\n";
+			cout << "You have been promoted to MYTHRIL rank adventure!\n\n";
 			player.rank = "MYTHRIL";
 			Sleep(1600);
 		}
 		if (player.money >= 10000 && player.rank == "MYTHRIL") {
-			cout << "You have been promoted to ADAMANTITE rank adventure!\n";
+			cout << "You have been promoted to ADAMANTITE rank adventure!\n\n";
 			player.rank = "ADAMANTITE";
 			Sleep(1600);
 		}
