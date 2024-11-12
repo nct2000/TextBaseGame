@@ -2,6 +2,8 @@
 #include <Windows.h>
 #include <limits>
 #include <ctime>
+#include <sstream>
+#include <vector>
 #include "GameFunctions.h"
 #include "Player.h"
 #include "Weapon.h"
@@ -10,24 +12,76 @@
 
 using namespace std;
 
+//This make a box around the text
+void textBox(const string& text) {
+	// Split text into lines
+	stringstream ss(text);
+	string line;
+	vector<string> lines;
+
+	while (getline(ss, line)) {
+		lines.push_back(line);
+	}
+
+	// Get the longest line to determine the box width
+	size_t maxLength = 0;
+	for (const auto& l : lines) {
+		if (l.length() > maxLength) {
+			maxLength = l.length();
+		}
+	}
+
+	// Create a border with enough width to fit the longest line
+	string border(maxLength + 4, '*');
+
+	// Print the top border
+	cout << border << endl;
+
+	// Print each line with padding on both sides
+	for (const auto& l : lines) {
+		cout << "* " << l << string(maxLength - l.length(), ' ') << " *" << endl;
+	}
+
+	// Print the bottom border
+	cout << border << endl;
+}
+
 //Display player info
 void displayPlayerInfo(Player& player, Weapon& dagger, Weapon& sword, Weapon& bow, Weapon& claymore, Weapon& crossbow, Weapon& halbeld) {
-	cout << "Name: " << player.name << ". Health: " << player.health << ". Money: " << player.money << " dollars. Energy: " << player.energy << "\n";
-	if (dagger.equipped) cout << "\nWeapon: DAGGER\n";
-	if (sword.equipped) cout << "\nWeapon: SWORD\n";
-	if (bow.equipped) cout << "\nWeapon: BOW\n";
-	if (claymore.equipped) cout << "\nWeapon: CLAYMORE\n";
-	if (crossbow.equipped) cout << "\nWeapon: CROSSBOW\n";
-	if (halbeld.equipped) cout << "\nWeapon: HALBELD\n";
+	//Construct the player info string
+	stringstream infoStream;
+	infoStream << "Name: " << player.name << ". Health: " << player.health << ". Money: " << player.money << " dollars. Energy: " << player.energy << "\n";
+	
+	//Check if any weapon is equipped and add to the info
+	if (dagger.equipped) infoStream << "\nWeapon: DAGGER\n";
+	if (sword.equipped) infoStream << "\nWeapon: SWORD\n";
+	if (bow.equipped) infoStream << "\nWeapon: BOW\n";
+	if (claymore.equipped) infoStream << "\nWeapon: CLAYMORE\n";
+	if (crossbow.equipped) infoStream << "\nWeapon: CROSSBOW\n";
+	if (halbeld.equipped) infoStream << "\nWeapon: HALBELD\n";
 
-	cout << "\nAdventure Rank: " << player.rank;
-	cout << "\n\n1) Go to Store\n2) Rest\n3) Fight\n\nAction: ";
+	infoStream << "\nAdventure Rank: " << player.rank;
+	infoStream << "\n\n1) Go to Store\n2) Rest\n3) Fight\n\nAction: ";
+
+	// Convert the stringstream to a string
+	string playerInfo = infoStream.str();
+
+	// Display the player info inside a box
+	textBox(playerInfo);
 }
 
 //Display shop info
 void displayShopInfo(Player& player, Weapon& dagger, Weapon& sword, Weapon& bow, Weapon& claymore, Weapon& crossbow, Weapon& halbeld) {
-	cout << "Welcome to the store! You have " << player.money << " $.\n";
-	cout << "\n1) DAGGER | $50\n2) SWORD | $300\n3) BOW | $800 \n4) CLAYMORE | $15000 \n5) CROSSBOW | $3000 \n6) HALBELD | $5000 \n7) Back\n\nAction: ";
+	//Construct the player info string
+	stringstream infoStream;
+	infoStream << "Welcome to the store! You have " << player.money << " $.\n";
+	infoStream << "\n1) DAGGER | $50\n2) SWORD | $300\n3) BOW | $800 \n4) CLAYMORE | $15000 \n5) CROSSBOW | $3000 \n6) HALBELD | $5000 \n7) Back\n\nAction: ";
+	
+	// Convert the stringstream to a string
+	string shopInfo = infoStream.str();
+
+	// Display the player info inside a box
+	textBox(shopInfo);
 }
 
 //Display menu
@@ -135,7 +189,7 @@ void store(Player& player, Weapon& dagger, Weapon& sword, Weapon& bow, Weapon& c
 			cout << "Invalid choice. Try again.\n";
 			Sleep(1000);
 			system("CLS");
-			displayShopInfo(player, dagger, sword, bow);
+			displayShopInfo(player, dagger, sword, bow, claymore, crossbow, halbeld);
 		}
 
 		//Dagger

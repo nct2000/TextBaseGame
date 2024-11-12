@@ -3,7 +3,7 @@
 #include "Player.h"
 #include "Weapon.h"
 #include "GameFunctions.h"
-#include"constants.h"
+#include "constants.h"
 
 using namespace std;
 
@@ -22,13 +22,13 @@ int main() {
 	system("Color f4");
 
 	//Start intro and input name
-	cout << gameTitle << endl;
-	cout << story << endl;
-	cout << "\nWhat is your name? ";
+	textBox(gameTitle);
+	textBox(story);
+	cout <<"\nWhat is your name? ";
 	cin >> player.name;
 
 	// Start the game loop
-	mainMenu(player, DAGGER, SWORD, BOW);
+	mainMenu(player, DAGGER, SWORD, BOW, CLAYMORE, CROSSBOW, HALBELD);
 
 	return 0;
 }
