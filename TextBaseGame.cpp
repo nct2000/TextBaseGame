@@ -9,12 +9,12 @@ using namespace std;
 
 int main() {
 	//Weapon info list
-	Weapon DAGGER ("DAGGER", 5, 50);
-	Weapon SWORD ("SWORD", 10, 300);
-	Weapon BOW ("SWORD", 18, 800);
-	Weapon CLAYMORE ("CLAYMORE", 25, 1500);
-	Weapon CROSSBOW ("CROSSBOW", 32, 3000);
-	Weapon HALBELD ("HALBELD", 40, 5000);
+	Weapon DAGGER("DAGGER", 5, 50);
+	Weapon SWORD("SWORD", 10, 300);
+	Weapon BOW("SWORD", 18, 800);
+	Weapon CLAYMORE("CLAYMORE", 25, 1500);
+	Weapon CROSSBOW("CROSSBOW", 32, 3000);
+	Weapon HALBELD("HALBELD", 40, 5000);
 
 	//Player start stat
 	Player player;
@@ -24,7 +24,7 @@ int main() {
 	//Start intro and input name
 	textBox(gameTitle);
 	textBox(story);
-	cout <<"\nWhat is your name? ";
+	cout << "\nWhat is your name? ";
 	cin >> player.name;
 
 	// Start the game loop

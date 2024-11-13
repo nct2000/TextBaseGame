@@ -51,7 +51,7 @@ void displayPlayerInfo(Player& player, Weapon& dagger, Weapon& sword, Weapon& bo
 	//Construct the player info string
 	stringstream infoStream;
 	infoStream << "Name: " << player.name << ". Health: " << player.health << ". Money: " << player.money << " dollars. Energy: " << player.energy << "\n";
-	
+
 	//Check if any weapon is equipped and add to the info
 	if (dagger.equipped) infoStream << "\nWeapon: DAGGER\n";
 	if (sword.equipped) infoStream << "\nWeapon: SWORD\n";
@@ -76,7 +76,7 @@ void displayShopInfo(Player& player, Weapon& dagger, Weapon& sword, Weapon& bow,
 	stringstream infoStream;
 	infoStream << "Welcome to the store! You have " << player.money << " $.\n";
 	infoStream << "\n1) DAGGER | $50\n2) SWORD | $300\n3) BOW | $800 \n4) CLAYMORE | $15000 \n5) CROSSBOW | $3000 \n6) HALBELD | $5000 \n7) Back\n\nAction: ";
-	
+
 	// Convert the stringstream to a string
 	string shopInfo = infoStream.str();
 
@@ -402,7 +402,7 @@ void store(Player& player, Weapon& dagger, Weapon& sword, Weapon& bow, Weapon& c
 				cout << "You don't have enough money.";
 				Sleep(1400);
 			}
-			}
+		}
 
 		//CROSSBOW
 		else if (choice == 5) {
@@ -455,7 +455,7 @@ void store(Player& player, Weapon& dagger, Weapon& sword, Weapon& bow, Weapon& c
 				cout << "You don't have enough money.";
 				Sleep(1400);
 			}
-			}
+		}
 
 		//HALBELD
 		else if (choice == 6) {
@@ -508,7 +508,7 @@ void store(Player& player, Weapon& dagger, Weapon& sword, Weapon& bow, Weapon& c
 				cout << "You don't have enough money.";
 				Sleep(1400);
 			}
-			}
+		}
 
 		//BACK
 		else if (choice == 7) {
@@ -587,7 +587,6 @@ void fight(Player& player, Weapon& dagger, Weapon& sword, Weapon& bow, Weapon& c
 
 //Boss scene
 void bossFight() {
-
 }
 
 //Rest to restore health and energy
