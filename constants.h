@@ -73,7 +73,7 @@ You've trained for this moment your entire life, honing your skills as a warrior
 
 Your goal is simple: Enter the dungeon, face its horrors, and slay the Overlord an ancient being so powerful that even the gods tremble in fear at the thought of it.
 
-You stand before the entrance, the dungeon great stone door slowly creaks open, as if it has been waiting for you. The air is thick with the scent of decay and an unnatural chill hangs in the air.       )";
+You stand before the entrance, the dungeon great stone door slowly creaks open, as if it has been waiting for you. The air is thick with the scent of decay and an unnatural chill hangs in the air.)";
 
 //The Overlord speaks
 const char* bossSpeak = R"(Foolish mortal, you think your light will save you? It will flicker and die, just like the others.)";

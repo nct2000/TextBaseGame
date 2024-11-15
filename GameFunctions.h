@@ -6,13 +6,14 @@
 
 // Function declarations
 void textBox(const string& text);
-void askForName(Player& player);
-void mainMenu(Player& player, Weapon& dagger, Weapon& sword, Weapon& bow, Weapon& claymore, Weapon& crossbow, Weapon& halbeld);
-void displayPlayerInfo(Player& player, Weapon& dagger, Weapon& sword, Weapon& bow, Weapon& claymore, Weapon& crossbow, Weapon& halbeld);
-void displayShopInfo(Player& player, Weapon& dagger, Weapon& sword, Weapon& bow, Weapon& claymore, Weapon& crossbow, Weapon& halbeld);
-void store(Player& player, Weapon& dagger, Weapon& sword, Weapon& bow, Weapon& claymore, Weapon& crossbow, Weapon& halbeld);
-void fight(Player& player, Weapon& dagger, Weapon& sword, Weapon& bow, Weapon& claymore, Weapon& crossbow, Weapon& halbeld);
-void bossFight();
+void displayWeapons(const vector<Weapon>& weapons, stringstream& infoStream);
+void displayPlayerInfo(Player& player, const vector<Weapon>& weapons);
+void displayShopInfo(Player& player, const vector<Weapon>& weapons);
+void checkHealth(Player& player);
+void checkRank(Player& player);
+void mainMenu(Player& player, vector<Weapon>& weapons);
+void store(Player& player, vector<Weapon>& weapons);
+void fight(Player& player, vector<Weapon>& weapons);
 void rest(Player& player);
 
 #endif // GAMEFUNCTIONS_H
