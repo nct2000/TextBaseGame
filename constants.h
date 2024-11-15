@@ -53,7 +53,7 @@ const char* gameTitle = R"(
                                                  +;+$$&&&&&&&&&x  .+    .:. .    .   :X$$x&&&&&&&&&&&&&&&&&&&&&&$&&$x++X$:+X&&&&&&&&X&&x$&&&&&&$$$$$XXX:        .;;;xxxXXXXX$&&$$$$$$&$$$&$$X:X$$$$
                                            .   :+  x$&&&&&&&&&&&&&;       x .:++::  .;x$;   :.X xxxX$X:.::+x    +$x:;+x$$$$&&&&&&&&&x$x&&$$$$$$$XXxxx+; +x;        .;+xxXXXX$$$$&&&&&$$$$&$$X;X$$$$
                                       .   ;   ..:.  .X&&&&&&&&&&&&&X     .:  .  ...  :x$+  :+XX .;;;x;    +x; .:+$x.;+X&&X+$$$&&&&$&xX&&&$$$$XXXXxx;     ...:+       ...+xXXX$xX$$&&&&&$$$$$&&X+X$$
-
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                                                         ::::::::::: :::    ::: ::::::::::              :::     :::::::::  :::   :::  ::::::::   ::::::::
                                                            :+:     :+:    :+: :+:                   :+: :+:   :+:    :+: :+:   :+: :+:    :+: :+:    :+:
                                                           +:+     +:+    +:+ +:+                  +:+   +:+  +:+    +:+  +:+ +:+  +:+        +:+
@@ -61,18 +61,13 @@ const char* gameTitle = R"(
                                                         +#+     +#+    +#+ +#+                 +#+     +#+ +#+    +#+    +#+           +#+        +#+
                                                        #+#     #+#    #+# #+#                 #+#     #+# #+#    #+#    #+#    #+#    #+# #+#    #+#
                                                       ###     ###    ### ##########          ###     ### #########     ###     ########   ########
-
-)";
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------)";
 
 //Short story
-const char* story = R"(You are an adventurer in a vast world where dungeons hold untold treasures and unspeakable horrors. For years, whispers have circulated about the Abyss dungeon, a place where
-
-the earth itself seems to tremble, and the very darkness devours all light. No one has ever returned from its depths, but that has never stopped those daring enough to seek glory and power.
-
+const char* story = R"(You are an adventurer in a vast world where dungeons hold untold treasures and unspeakable horrors. For years, whispers have circulated about the Abyss dungeon, a place where the earth itself
+seems to tremble, and the very darkness devours all light. No one has ever returned from its depths, but that has never stopped those daring enough to seek glory and power.
 You've trained for this moment your entire life, honing your skills as a warrior, mastering the use of Divine Art, and preparing to face whatever the Abyss throws at you.
-
 Your goal is simple: Enter the dungeon, face its horrors, and slay the Overlord an ancient being so powerful that even the gods tremble in fear at the thought of it.
-
 You stand before the entrance, the dungeon great stone door slowly creaks open, as if it has been waiting for you. The air is thick with the scent of decay and an unnatural chill hangs in the air.)";
 
 //The Overlord speaks
