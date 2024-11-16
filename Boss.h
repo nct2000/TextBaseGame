@@ -10,6 +10,7 @@ public:
 	string requiredRank;
 	int hp;
 	int weakPoint;
+	bool beated = false;
 
 	Boss(string name, int difficulty, string requiredRank, int hp, int weakPoint) : name(name), difficulty(difficulty), requiredRank(requiredRank), hp(hp), weakPoint(weakPoint) {}
 };

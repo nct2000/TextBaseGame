@@ -9,16 +9,18 @@
 #include "GameFunctions.h"
 #include "Player.h"
 #include "Weapon.h"
+#include "Rank.h"
 #include "Boss.h"
+#include "Ascii.h"
 
 #undef max
 
 using namespace std;
 
-// Enum for arrow keys for better clarity
+//Enum for arrow keys for better clarity
 enum ArrowKey { UP = VK_UP, DOWN = VK_DOWN, LEFT = VK_LEFT, RIGHT = VK_RIGHT };
 
-// Function to generate a random arrow key
+//Function to generate a random arrow key
 ArrowKey getRandomArrow() {
 	int random = rand() % 4;
 	switch (random) {
@@ -30,7 +32,7 @@ ArrowKey getRandomArrow() {
 	return UP;  // Default case (this should never happen)
 }
 
-// Function to display the corresponding arrow key as a string
+//Function to display the corresponding arrow key as a string
 string arrowKeyToString(ArrowKey key) {
 	switch (key) {
 	case UP: return "UP";
@@ -41,10 +43,10 @@ string arrowKeyToString(ArrowKey key) {
 	}
 }
 
-// Function to check if a specific key is pressed
+//Function to check if a specific key is pressed
 bool isKeyPressed(ArrowKey key) { return GetAsyncKeyState(key) & 0x8000; }
 
-// Function to display the remaining time
+//Function to display the remaining time
 void displayTimer(int timeLeft) {
 	//Construct
 	stringstream infoStream;
@@ -105,7 +107,7 @@ void displayPlayerInfo(Player& player, const vector<Weapon>& weapons) {
 	displayWeapons(weapons, infoStream);
 
 	infoStream << "\nAdventure Rank: " << player.rank;
-	infoStream << "\n\n1) Go to Store\n2) Rest($50 for heal)\n3) Fight(more dmg more $)\n4) Fight the rank boss(need to kill to rank up)";
+	infoStream << "\n\n1) Go to Store\n2) Rest($50 for heal)\n3) Fight(more dmg more $)\n4) Fight the rank boss(need to rank up)";
 
 	// Display the player info inside a box
 	textBox(infoStream.str());
@@ -145,19 +147,39 @@ void checkHealth(Player& player) {
 	}
 }
 
-// Promotions based on money(requirement for boss fight)
-void checkRank(Player& player) {
+//Check rank(requirement for boss fight)
+void checkRank(Player& player, const vector<Rank>& ranks) {
 	//Construct
 	stringstream infoStream;
 
-	const vector<pair<int, string>> rankPromotions = { {500, "SILVER"}, {1000, "GOLD"}, {3000, "PLATINUM"}, {5000, "MYTHRIL"}, {10000, "ADAMANTITE"} };
-	for (const auto& promotion : rankPromotions) {
-		int moneyReq = promotion.first;
-		const string& newRank = promotion.second;
+	int currentRankIndex = -1;
+	for (size_t i = 0; i < ranks.size(); ++i) {
+		if (ranks[i].name == player.rank) {
+			currentRankIndex = i;
+			break;
+		}
+	}
 
-		if (player.money >= moneyReq && player.rank != newRank) {
-			infoStream << "Promoted to " << newRank << " rank adventurer!\n";
-			player.rank = newRank;
+	if (player.rank == "BRONZE") {
+		currentRankIndex = 0; //Assume BRONZE is at index 0, move to index 1
+	}
+
+	//Check if the player is eligible for the next rank
+	int moneyReq = 0;
+	const string& nextRank="SILVER";
+	if (currentRankIndex + 1 < ranks.size()) {
+		if (player.rank == "BRONZE") {
+			moneyReq = ranks[currentRankIndex].cost;
+			const string& nextRank = ranks[currentRankIndex].name;
+		}
+		else {
+			moneyReq = ranks[currentRankIndex + 1].cost;
+			const string& nextRank = ranks[currentRankIndex + 1].name;
+		}
+		
+
+		if (player.money >= moneyReq) {
+			infoStream << "You can fight the boss to upgrade to " << nextRank << " rank adventurer!\n";
 			textBox(infoStream.str());
 			Sleep(1600);
 		}
@@ -170,16 +192,14 @@ void clearInput() {
 }
 
 //Display menu
-void mainMenu(Player& player, vector<Weapon>& weapons, vector<Boss>& bosses) {
+void mainMenu(Player& player, vector<Weapon>& weapons, vector<Boss>& bosses, vector<Rank>& ranks) {
 	//Construct
 	stringstream infoStream;
-
-	static string lastBossRank = player.rank;
 
 	while (true) {
 		system("CLS");
 		checkHealth(player);
-		checkRank(player);
+		checkRank(player, ranks);
 		displayPlayerInfo(player, weapons);
 
 		//ERROR INPUT HANDLE
@@ -197,39 +217,75 @@ void mainMenu(Player& player, vector<Weapon>& weapons, vector<Boss>& bosses) {
 		case 1:store(player, weapons); break;
 		case 2:rest(player); break;
 		case 3:fight(player, weapons); break;
-		case 4:
-			// Check if the player is ready to fight the boss of the current rank
-			if (player.rank == lastBossRank && player.rank != "BRONZE" && player.health == "Full") {
-				// Find the boss that corresponds to the current rank
-				Boss* currentBoss = nullptr;
-				for (auto& boss : bosses) {
-					if (boss.requiredRank == player.rank) {
-						currentBoss = &boss;
+		case 4: {
+			// Find the index of the player's current rank in the ranks vector
+			int currentRankIndex = -1;
+
+			// Special case for "BRONZE", which is not in the ranks vector
+			if (player.rank == "BRONZE") {
+				currentRankIndex = 0;
+			}
+			else {
+				// Find the index of the player's current rank in the ranks vector
+				for (size_t i = 0; i < ranks.size(); ++i) {
+					if (ranks[i].name == player.rank) {
+						currentRankIndex = i;
 						break;
 					}
 				}
+			}
 
-				if (currentBoss != nullptr) {
-					// Proceed with the boss fight
-					bossfight(player, *currentBoss);
-					// After defeating the boss, check if the player should rank up
-					checkRank(player);
-					lastBossRank = player.rank;  // Update last boss rank fought
+			int nextRankMoney = 0;
+			if (currentRankIndex != -1 && currentRankIndex + 1 < ranks.size()) {
+				if (player.rank == "BRONZE") {
+					nextRankMoney = ranks[currentRankIndex].cost;
 				}
 				else {
-					infoStream << "No boss found for the current rank.\n";
-					textBox(infoStream.str());
-					infoStream.str("");
-					Sleep(1000);
+					nextRankMoney = ranks[currentRankIndex + 1].cost;
 				}
 			}
-			else {
-				infoStream << "Your rank is not ready for the boss fight or your health is not full.\n";
-				textBox(infoStream.str());
-				infoStream.str("");
-				Sleep(1000);
+
+			//Loop through the bosses to find the eligible boss for the player's rank
+			bool canFightBoss = false;
+			for (size_t i = 0; i < bosses.size(); ++i) {
+				if (bosses[i].requiredRank == player.rank && !bosses[i].beated) {
+					//Check if the player has enough money and full health
+					if (player.money >= nextRankMoney && player.health == "Full") {
+						canFightBoss = true;
+
+						//Logic to initiate the boss fight
+						infoStream << "You are ready to fight the boss: " << bosses[i].name << "!\n";
+						textBox(infoStream.str());
+						infoStream.str("");
+
+						bossfight(player, bosses, ranks);
+						break;
+					}
+				}
 			}
-			break;
+
+			// Provide feedback if the player can't fight the boss
+			if (!canFightBoss) {
+				if (player.money < nextRankMoney && player.health != "Full") {
+					infoStream << "Your rank is not ready for the boss fight, your money is less than " << nextRankMoney << " and your health is not full.\n";
+					textBox(infoStream.str());
+					infoStream.str("");
+					Sleep(2000);
+				}
+				else if (player.money < nextRankMoney) {
+					infoStream << "Your rank is not ready for the boss fight, your money is less than " << nextRankMoney << ".\n";
+					textBox(infoStream.str());
+					infoStream.str("");
+					Sleep(2000);
+				}
+				else if (player.health != "Full") {
+					infoStream << "Your rank is not ready for the boss fight, or your health is not full.\n";
+					textBox(infoStream.str());
+					infoStream.str("");
+					Sleep(2000);
+				}
+			}
+		}; break;
 		default:
 			infoStream << "Invalid choice. Try again.\n";
 			textBox(infoStream.str());
@@ -278,7 +334,7 @@ void store(Player& player, vector<Weapon>& weapons) {
 					infoStream << "Invalid choice. Please enter 1 or 2.\n";
 					textBox(infoStream.str());
 					infoStream.str("");
-					Sleep(1000);
+					Sleep(1400);
 					system("CLS");
 					displayShopInfo(player, weapons);
 					infoStream << "You already purchased the " << weapon.name << ". Would you like to equip it?\n\n1) Yes\n2) No";
@@ -315,7 +371,7 @@ void store(Player& player, vector<Weapon>& weapons) {
 						infoStream << "Invalid choice. Please enter 1 or 2.\n";
 						textBox(infoStream.str());
 						infoStream.str("");
-						Sleep(1000);
+						Sleep(1400);
 						system("CLS");
 						displayShopInfo(player, weapons);
 						infoStream << "You've purchased the " << weapon.name << ". Would you like to equip it?\n\n1) Yes\n2) No";
@@ -369,7 +425,7 @@ void store(Player& player, vector<Weapon>& weapons) {
 	}
 }
 
-//Fight for money and rank up
+//Fight for money
 void fight(Player& player, vector<Weapon>& weapons) {
 	srand(static_cast<unsigned int>(time(0)));
 	system("CLS");
@@ -377,54 +433,64 @@ void fight(Player& player, vector<Weapon>& weapons) {
 	//Construct
 	stringstream infoStream;
 
-	checkHealth(player);
-
 	//Check if player is injured, they can't fight
 	if (player.health == "Injured") { return; }
 
 	//Check if the player has enough energy
-	if (player.energy < 40) { infoStream << "Not enough energy.\n"; textBox(infoStream.str());Sleep(1000); return; }
+	if (player.energy < 20) { infoStream << "Not enough energy.\n"; textBox(infoStream.str()); Sleep(1000); return; }
 
 	bool hasEquippedWeapon = false;
-	for (const auto& weapon : weapons) { if (weapon.equipped) { hasEquippedWeapon = true;break; } }
+	for (const auto& weapon : weapons) { if (weapon.equipped) { hasEquippedWeapon = true; break; } }
 
 	//Check if the player has an equipped weapon
-	if (!hasEquippedWeapon) { infoStream << "You don't have a weapon equipped.\n"; textBox(infoStream.str());Sleep(1400); return; }
+	if (!hasEquippedWeapon) { infoStream << "You don't have a weapon equipped.\n"; textBox(infoStream.str()); Sleep(1400); return; }
 
 	//Calculate kill with weapon
 	int enemiesKilled = 0;
-	for (auto& weapon : weapons) { 
-		if (weapon.equipped) { 
-			enemiesKilled = rand() % (weapon.damage / 2) + (weapon.damage / 2); 
+	for (auto& weapon : weapons) {
+		if (weapon.equipped) {
+			enemiesKilled = rand() % (weapon.damage / 2) + (weapon.damage / 2);
 			// Chance for treasure drop (10% chance)
-			if (rand() % 10 <1 ) {
+			if (rand() % 10 < 1) {
 				int treasureAmount = weapon.damage * 2;
 				player.money += treasureAmount;
 				infoStream << "You found treasure worth $" << treasureAmount << "!\n";
 			}
-		} 
+		}
 	}
 
 	//Update player money and energy after the fight
 	player.money += enemiesKilled * 15;
 	player.energy -= enemiesKilled * 2;
 
-	infoStream << "Killed " << enemiesKilled << " enemies, earned $" << enemiesKilled * 15 << ".\n";
+	if (player.energy < 0) { player.energy = 0; }
 
-	
+	infoStream << "Killed " << enemiesKilled << " enemies, earned $" << enemiesKilled * 15 << ".\n";
 
 	textBox(infoStream.str());
 
 	//Random damage to limb
-	if (rand() % 10 < 4) { string* limbs[] = { &player.l_a, &player.r_a, &player.l_l, &player.r_l };*limbs[rand() % 4] = "Damaged"; }
-	Sleep(1000);
+	if (rand() % 10 < 3) { string* limbs[] = { &player.l_a, &player.r_a, &player.l_l, &player.r_l }; *limbs[rand() % 4] = "Damaged"; }
+	Sleep(1400);
 }
 
-void bossfight(Player& player, Boss& bosses) {
+//Fight boss for rank up
+void bossfight(Player& player, vector<Boss>& bosses, vector<Rank>& ranks) {
 	srand(static_cast<unsigned>(time(0)));
 
-	while (bosses.hp > 0) {
-		int sequenceLength = bosses.difficulty;
+	// Check if the player's rank matches the boss's required rank
+	auto it = find_if(bosses.begin(), bosses.end(), [&player](const Boss& boss) {
+		return boss.requiredRank == player.rank && !boss.beated;
+		});
+
+	if (it == bosses.end()) {
+		cout << "\nNo boss available for your current rank (" << player.rank << ")." << endl;
+		return;  // Exit if no boss is available
+	}
+
+	Boss& currentBoss = *it;
+	while (currentBoss.hp > 0) {
+		int sequenceLength = currentBoss.difficulty;
 		vector<ArrowKey> sequence(sequenceLength);
 
 		// Initialize random number generator
@@ -435,21 +501,20 @@ void bossfight(Player& player, Boss& bosses) {
 			sequence[i] = getRandomArrow();
 		}
 
-		// Set a 10-second timer
 		auto startTime = chrono::steady_clock::now();
 		int currentIndex = 0;
 		bool attSuccess = false;
 		bool keyPressed = false;
 
 		// Display instructions
-		cout << "Press the following arrow keys in the correct order to deal dmg to the boss:" << endl;
+		cout << "Press the following arrow keys in the correct order to deal damage to the boss: " << currentBoss.name << endl;
 		for (int i = 0; i < sequenceLength; ++i) {
 			cout << arrowKeyToString(sequence[i]) << " ";
 		}
 		cout << endl;
 
 		// Start the countdown and game logic
-		int bTime = bosses.difficulty;
+		int bTime = currentBoss.difficulty;
 		while (chrono::steady_clock::now() - startTime < chrono::seconds(bTime)) {
 			// Get the remaining time
 			int timeLeft = bTime - chrono::duration_cast<chrono::seconds>(chrono::steady_clock::now() - startTime).count();
@@ -462,7 +527,7 @@ void bossfight(Player& player, Boss& bosses) {
 						currentIndex++;  // Move to next key in sequence
 						keyPressed = true;  // Block further input until the key is released
 						system("CLS");
-						cout << "Press the following arrow keys in the correct order:" << endl;
+						cout << "Press the following arrow keys in the correct order: " << currentBoss.name << endl;
 						for (int i = 0; i < sequenceLength; ++i) {
 							cout << arrowKeyToString(sequence[i]) << " ";
 						}
@@ -480,8 +545,10 @@ void bossfight(Player& player, Boss& bosses) {
 			// If the player has pressed the correct key, wait for key release before accepting next key press
 			if (keyPressed) {
 				// Wait for key release before accepting the next key press
-				while (isKeyPressed(sequence[currentIndex - 1])) {
-					this_thread::sleep_for(chrono::milliseconds(10));  // Just to prevent high CPU usage
+				if (currentIndex < sequenceLength) {
+					while (isKeyPressed(sequence[currentIndex - 1])) {
+						this_thread::sleep_for(chrono::milliseconds(10));  // Just to prevent high CPU usage
+					}
 				}
 				keyPressed = false;  // Reset to allow next press
 			}
@@ -491,19 +558,29 @@ void bossfight(Player& player, Boss& bosses) {
 		}
 
 		// End of game feedback
-		if (attSuccess == true) {
-			bosses.hp -= 1;
+		if (attSuccess) {
+			currentBoss.hp -= 1;
 			cout << "\nYou damage the boss!" << endl;
-			cout << "Boss: "<< bosses.name << "HP: " << bosses.hp << endl;
+			cout << "Boss: " << currentBoss.name << " HP: " << currentBoss.hp << endl;
 		}
 		else {
-			cout << "\nTime's up! You failed to damge the boss in time." << endl;
+			cout << "\nTime's up! You failed to damage the boss in time." << endl;
+			player.live -= 1;
 		}
 
 		// Check if the boss is defeated
-		if (bosses.hp <= 0) {
-			std::cout << "\nYou have defeated the boss!" << std::endl;
-			break;
+		if (currentBoss.hp <= 0) {
+			currentBoss.beated = true;
+			cout << "\nYou have defeated the boss!" << endl;
+
+			// Find and set the new rank
+			for (auto& rank : ranks) {
+				if (rank.name == currentBoss.requiredRank) {
+					player.rank = rank.name;  // Promote player to the next rank
+					break;
+				}
+			}
+			break;  // Exit the loop after defeating the boss
 		}
 	}
 }
@@ -514,8 +591,8 @@ void rest(Player& player) {
 	stringstream infoStream;
 
 	system("CLS");
-	if (player.money >= 50 && player.health != "Full") { player.energy = 100; player.health = "Full";player.money -= 50;player.l_a = player.r_a = player.l_l = player.r_l = "Normal";infoStream << "You rested and healed.";textBox(infoStream.str());Sleep(1400); }
-	else if (player.energy != 100) { player.energy = 100; infoStream << "You rested.";textBox(infoStream.str());Sleep(1400); }
-	else if (player.health == "Full" || player.energy == 100) { infoStream << "You don't need to rest.\n";textBox(infoStream.str());Sleep(1400); }
-	else { infoStream << "You don't have enough money.\n";textBox(infoStream.str());Sleep(1400); }
+	if (player.money >= 50 && player.health != "Full") { player.energy = 100; player.health = "Full"; player.money -= 50; player.l_a = player.r_a = player.l_l = player.r_l = "Normal"; infoStream << "You rested and healed."; textBox(infoStream.str()); Sleep(1400); }
+	else if (player.energy != 100) { player.energy = 100; infoStream << "You rested."; textBox(infoStream.str()); Sleep(1400); }
+	else if (player.health == "Full" || player.energy == 100) { infoStream << "You don't need to rest.\n"; textBox(infoStream.str()); Sleep(1400); }
+	else { infoStream << "You don't have enough money.\n"; textBox(infoStream.str()); infoStream.str(""); textBox(skeletonArt); Sleep(1400); }
 }
