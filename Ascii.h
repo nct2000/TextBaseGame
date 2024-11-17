@@ -11,5 +11,5 @@ extern const char* const slimeArt;
 extern const char* const orcArt;
 extern const char* const minotaurArt;
 extern const char* const lichArt;
-extern const char* const overloarArt;
+extern const char* const overlordArt;
 #endif //ASCII_H

@@ -10,9 +10,10 @@ public:
 	string requiredRank;
 	int hp;
 	int weakPoint;
-	bool beated = false;
+	bool beaten = false;
+	const char* art;
 
-	Boss(string name, int difficulty, string requiredRank, int hp, int weakPoint) : name(name), difficulty(difficulty), requiredRank(requiredRank), hp(hp), weakPoint(weakPoint) {}
+	Boss(string name, int difficulty, string requiredRank, int hp, int weakPoint, const char* art) : name(name), difficulty(difficulty), requiredRank(requiredRank), hp(hp), weakPoint(weakPoint), art(art) {}
 };
 
 #endif // BOSS_H

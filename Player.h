@@ -15,7 +15,7 @@ public:
 	string r_l = "Normal"; // Right leg
 	int live;
 
-	Player(string name = "Player", int money = 100, int energy = 100, int live = 3) : name(name), money(money), energy(energy) {}
+	Player(string name = "Player", int money = 100, int energy = 100, int live = 5) : name(name), money(money), energy(energy), live(live) {}
 };
 
 #endif // PLAYER_H
