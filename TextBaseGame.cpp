@@ -32,8 +32,9 @@ int main() {
 	infoStream << gameTitleArt << endl << story;
 	textBox(infoStream.str());
 	infoStream.str("");
-	cout << "\nWhat is your name? ";
+	cout << "What is your name ? ";
 	cin >> player.name;
+
 
 	// Start the game loop
 	mainMenu(player, weapons, bosses, ranks);

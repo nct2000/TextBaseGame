@@ -12,4 +12,5 @@ extern const char* const orcArt;
 extern const char* const minotaurArt;
 extern const char* const lichArt;
 extern const char* const overlordArt;
+extern const char* const noMoney;
 #endif //ASCII_H
