@@ -15,10 +15,10 @@ int main() {
 	stringstream infoStream;
 
 	//Weapon info list
-	vector<Weapon> weapons = {{"DAGGER",6,50},{"SWORD",10,300},{"BOW",18,800},{"CLAYMORE",24,1500},{"CROSSBOW",32,3000},{"HALBELD",40,5000} };
+	vector<Weapon> weapons = {{"DAGGER",6,50},{"SWORD",15,300},{"BOW",25,800},{"CLAYMORE",32,1500},{"CROSSBOW",40,3000},{"HALBELD",55,5000} };
 
 	//Boss info list
-	vector<Boss> bosses = {{"GIANT SLIME",3,"BRONZE",5,3,slimeArt},{"ORC CHIEF",5,"SILVER",10,5,orcArt},{"MINORTAURS",8,"GOLD",15,8,minotaurArt},{"BEHOLDER",10,"PLATINUM",20,12,beholderArt},{"LICH",15,"MYTHRIL",30,15,lichArt},{"THE OVERLORD",20,"ADAMANTITE",40,22,overlordArt}};
+	vector<Boss> bosses = {{"GIANT SLIME",3,"BRONZE",5,3,slimeArt},{"ORC CHIEF",5,"SILVER",10,5,orcArt},{"MINORTAURS",8,"GOLD",15,5,minotaurArt},{"BEHOLDER",10,"PLATINUM",20,6,beholderArt},{"LICH",15,"MYTHRIL",30,7,lichArt},{"THE OVERLORD",20,"ADAMANTITE",40,8,overlordArt}};
 
 	//Rank info list
 	vector<Rank> ranks = {{500,"SILVER"},{1000,"GOLD"},{3000,"PLATINUM"},{5000,"MYTHRIL"},{12000,"ADAMANTITE"}};
