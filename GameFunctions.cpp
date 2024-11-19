@@ -497,6 +497,11 @@ void bossfight(Player& player, vector<Boss>& bosses, vector<Rank>& ranks, vector
 	if (it == bosses.end()) { cout << "\nNo boss available for your current rank (" << player.rank << ").\n"; return; }
 
 	Boss& currentBoss = *it;
+
+	//Only reset combo if the boss's HP is full (indicating a new fight)
+	static int bossMaxHP = currentBoss.hp;
+	if (currentBoss.hp == bossMaxHP) { player.combo = 0; }
+
 	while (currentBoss.hp > 0) {
 		int sequenceLength = currentBoss.difficulty;
 		vector<ArrowKey> sequence(sequenceLength);
@@ -507,7 +512,7 @@ void bossfight(Player& player, vector<Boss>& bosses, vector<Rank>& ranks, vector
 		}
 
 		//Display instructions
-		cout << "Press the following arrow keys in the correct order to deal damage to the boss: " << currentBoss.name << " HP left: " << currentBoss.hp << " \n\n";
+		cout << "Press the following arrow keys in the correct order to deal damage to the boss: " << currentBoss.name << " HP left: " << currentBoss.hp << " Combo: " << player.combo << " \n\n";
 		for (int i = 0; i < sequenceLength; ++i) { cout << arrowKeyToString(sequence[i]) << " "; }
 
 		//Display static status line
@@ -520,7 +525,7 @@ void bossfight(Player& player, vector<Boss>& bosses, vector<Rank>& ranks, vector
 		bool attSuccess = false;
 
 		//Start the countdown and game logic
-		int bTime = currentBoss.difficulty;
+		int bTime = currentBoss.difficulty + 1;
 		while (chrono::steady_clock::now() - startTime < chrono::seconds(bTime)) {
 			int timeLeft = bTime - chrono::duration_cast<chrono::seconds>(chrono::steady_clock::now() - startTime).count();
 			string nextKey = currentIndex < sequenceLength ? arrowKeyToString(sequence[currentIndex]) : "None";
@@ -532,7 +537,7 @@ void bossfight(Player& player, vector<Boss>& bosses, vector<Rank>& ranks, vector
 				currentIndex++;  //Move to the next key
 
 				//Wait for key release to prevent double detection
-				while (isKeyPressed(sequence[currentIndex - 1])) { this_thread::sleep_for(chrono::milliseconds(10));	clearInput(); }
+				while (isKeyPressed(sequence[currentIndex - 1])) { this_thread::sleep_for(chrono::milliseconds(10));}
 			}
 
 			//Check if the sequence is completed
@@ -544,15 +549,13 @@ void bossfight(Player& player, vector<Boss>& bosses, vector<Rank>& ranks, vector
 
 		moveCursorToPosition(0, 6);
 
-		//When player combo = boss weakPoint active skill Divine Art instant kill the boss
-		int combo = 0;
-
 		//Deal dmg if success
-		if (combo == currentBoss.weakPoint && attSuccess) {
+		if (player.combo >= currentBoss.weakPoint && attSuccess) {
+			player.combo = 0;
 			currentBoss.hp = 0;
 			currentBoss.beaten = true;
 			cout << "Here my Ultimate Skill [Divine Art] take that\n";
-			cout << "\nYou have defeated the boss!";
+			cout << "\nYou have defeated the boss!\n";
 
 			int currentRankIndex = -1;
 			for (size_t i = 0; i < ranks.size(); ++i) { if (ranks[i].name == player.rank) { currentRankIndex = i; break; } }
@@ -567,8 +570,8 @@ void bossfight(Player& player, vector<Boss>& bosses, vector<Rank>& ranks, vector
 				cout << "\nYou promoted to " << nextRank << " adventurer rank!\n";
 				player.live += 3;
 				moveCursorToPosition(0, 0);
-				cout << "Press the following arrow keys in the correct order to deal damage to the boss: " << currentBoss.name << " HP left: " << currentBoss.hp << " \n\n";
-				Sleep(3000);
+				cout << "Press the following arrow keys in the correct order to deal damage to the boss: " << currentBoss.name << " HP left: " << currentBoss.hp << " Combo: " << player.combo << " \n\n";
+				Sleep(5000);
 				break;
 			}
 
@@ -577,18 +580,19 @@ void bossfight(Player& player, vector<Boss>& bosses, vector<Rank>& ranks, vector
 			for (auto& weapon : weapons) {
 				if (weapon.equipped) {
 					if (weapon.damage < 10) {
+						player.combo += 1;
 						int dmg = 1;
 						currentBoss.hp -= dmg;
 						cout << "You deal " << dmg << " damage to the boss!\n";
 						moveCursorToPosition(0, 0);
-						cout << "Press the following arrow keys in the correct order to deal damage to the boss: " << currentBoss.name << " HP left: " << currentBoss.hp << " \n\n";
-
+						cout << "Press the following arrow keys in the correct order to deal damage to the boss: " << currentBoss.name << " HP left: " << currentBoss.hp << " Combo: " << player.combo << " \n\n";
 						//Check if the boss is defeated
 						if (currentBoss.hp <= 0) {
+							player.combo = 0;
 							currentBoss.hp = 0;
 							currentBoss.beaten = true;
-							moveCursorToPosition(0, 7);
-							cout << "\nYou have defeated the boss!\n";
+							moveCursorToPosition(0, 8);
+							cout << "You have defeated the boss!\n";
 
 							//Find and set the new rank
 							int currentRankIndex = -1;
@@ -611,6 +615,7 @@ void bossfight(Player& player, vector<Boss>& bosses, vector<Rank>& ranks, vector
 						}
 					}
 					else {
+						player.combo += 1;
 						int dmg = 0;
 						int wd = weapon.damage;
 						while (wd >= 10) {
@@ -620,14 +625,14 @@ void bossfight(Player& player, vector<Boss>& bosses, vector<Rank>& ranks, vector
 						currentBoss.hp -= dmg;
 						cout << "You deal " << dmg << " damage to the boss!\n";
 						moveCursorToPosition(0, 0);
-						cout << "Press the following arrow keys in the correct order to deal damage to the boss: " << currentBoss.name << " HP left: " << currentBoss.hp << " \n\n";
-
+						cout << "Press the following arrow keys in the correct order to deal damage to the boss: " << currentBoss.name << " HP left: " << currentBoss.hp << " Combo: " << player.combo << " \n\n";
 						//Check if the boss is defeated
 						if (currentBoss.hp <= 0) {
+							player.combo = 0;
 							currentBoss.hp = 0;
 							currentBoss.beaten = true;
-							moveCursorToPosition(0, 7);
-							cout << "\nYou have defeated the boss!\n";
+							moveCursorToPosition(0, 8);
+							cout << "You have defeated the boss!\n";
 
 							//Find and set the new rank
 							int currentRankIndex = -1;
@@ -643,7 +648,7 @@ void bossfight(Player& player, vector<Boss>& bosses, vector<Rank>& ranks, vector
 								cout << "\nYou promoted to " << nextRank << " adventurer rank!\n";
 								player.live += 3;
 								moveCursorToPosition(0, 0);
-								cout << "Press the following arrow keys in the correct order to deal damage to the boss: " << currentBoss.name << " HP left: " << currentBoss.hp << " \n\n";
+								cout << "Press the following arrow keys in the correct order to deal damage to the boss: " << currentBoss.name << " HP left: " << currentBoss.hp << " Combo: " << player.combo << " \n\n";
 								Sleep(3000);
 								break;
 							}
@@ -654,7 +659,7 @@ void bossfight(Player& player, vector<Boss>& bosses, vector<Rank>& ranks, vector
 			Sleep(6000);
 			break;
 		}
-		else { cout << "\nTime's up! You failed to damage the boss in time.\n"; Sleep(3000); player.live -= 1; break; }
+		else { cout << "\nTime's up! You failed to damage the boss in time.\n"; Sleep(3000); player.live -= 1; player.combo = 0; break; }
 	}
 }
 
