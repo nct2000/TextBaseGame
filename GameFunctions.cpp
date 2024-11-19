@@ -16,6 +16,7 @@
 #undef max
 
 using namespace std;
+using namespace chrono;
 
 //Enum for arrow keys for better clarity
 enum ArrowKey { UP = VK_UP, DOWN = VK_DOWN, LEFT = VK_LEFT, RIGHT = VK_RIGHT };
@@ -314,6 +315,7 @@ void mainMenu(Player& player, vector<Weapon>& weapons, vector<Boss>& bosses, vec
 			system("CLS");
 			break;
 		}
+		clearInput();
 	}
 }
 
@@ -520,14 +522,14 @@ void bossfight(Player& player, vector<Boss>& bosses, vector<Rank>& ranks, vector
 
 		moveCursorToPosition(0, 12);
 		textBox(currentBoss.art);
-		auto startTime = chrono::steady_clock::now();
+		auto startTime = steady_clock::now();
 		int currentIndex = 0;
 		bool attSuccess = false;
 
 		//Start the countdown and game logic
 		int bTime = currentBoss.difficulty + 1;
-		while (chrono::steady_clock::now() - startTime < chrono::seconds(bTime)) {
-			int timeLeft = bTime - chrono::duration_cast<chrono::seconds>(chrono::steady_clock::now() - startTime).count();
+		while (steady_clock::now() - startTime < seconds(bTime)) {
+			int timeLeft = bTime - duration_cast<seconds>(steady_clock::now() - startTime).count();
 			string nextKey = currentIndex < sequenceLength ? arrowKeyToString(sequence[currentIndex]) : "None";
 
 			//Update the dynamic parts of the status line
@@ -537,14 +539,14 @@ void bossfight(Player& player, vector<Boss>& bosses, vector<Rank>& ranks, vector
 				currentIndex++;  //Move to the next key
 
 				//Wait for key release to prevent double detection
-				while (isKeyPressed(sequence[currentIndex - 1])) { this_thread::sleep_for(chrono::milliseconds(10));}
+				while (isKeyPressed(sequence[currentIndex - 1])) { this_thread::sleep_for(milliseconds(10));}
 			}
 
 			//Check if the sequence is completed
 			if (currentIndex == sequenceLength) { attSuccess = true; break; }
 
 			//Just to prevent high CPU usage
-			this_thread::sleep_for(chrono::milliseconds(50));
+			this_thread::sleep_for(milliseconds(50));
 		}
 
 		moveCursorToPosition(0, 6);
