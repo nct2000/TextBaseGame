@@ -30,8 +30,7 @@ int main() {
 
 	//Start intro and input name
 	infoStream << gameTitleArt << endl << story;
-	textBox(infoStream.str());
-	infoStream.str("");
+	textBoxClean(infoStream);
 	cout << "What is your name ? ";
 	cin >> player.name;
 

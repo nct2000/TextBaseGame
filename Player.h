@@ -16,7 +16,7 @@ public:
 	int live;
 	int combo;
 
-	Player(string name = "Player", int money = 10000, int energy = 100, int live = 5) : name(name), money(money), energy(energy), live(live) {}
+	Player(string name = "Player", int money = 100000, int energy = 100, int live = 1) : name(name), money(money), energy(energy), live(live) {}
 };
 
 #endif // PLAYER_H
