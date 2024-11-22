@@ -75,13 +75,9 @@ R"(                                             .:+x$&&&&&&&&&&&&$x+xxx+xxxx:.:+
 
 //Short story
 const char* const story = R"(You are an adventurer in a vast world where dungeons hold untold treasures and unspeakable horrors. For years, whispers have circulated about the Abyss dungeon, a place where the earth
-
 itself seems to tremble, and the very darkness devours all light. No one has ever returned from its depths, but that has never stopped those daring enough to seek glory and power.
-
 You've trained for this moment your entire life, honing your skills as a warrior, mastering the use of Divine Art, and preparing to face whatever the Abyss throws at you.
-
 Your goal is simple: Enter the dungeon, face its horrors, and slay the Overlord an ancient being so powerful that even the gods tremble in fear at the thought of it.
-
 You stand before the entrance, the dungeon great stone door slowly creaks open, as if it has been waiting for you. The air is thick with the scent of decay and chill hangs in the air.)";
 
 //The Overlord speaks
@@ -92,13 +88,9 @@ const char* const playerWin = R"(The light will never die, and neither will I.)"
 
 //Endgame dialog
 const char* const endGame = R"(You killed the Overlord. The dungeon's oppressive atmosphere began to dissipate, and the labyrinth of darkness around them started to crumble, as if it had no reason to exist without
-
 the Overlord's will to control it. Your hand trembled with anticipation as they stepped forward into the final chamber, where the artifact lay upon a pedestal bathed in an eerie, otherworldly glow.
-
 It was an ancient relic, pulsing with a power that could reshape the very fabric of reality. With a steady breath, your took it into their grasp, the weight of its significance overwhelming.
-
 In that moment, they knew their journey had come to an end.
-
 You found the artifact of the abyss!!!)";
 
 const char* const skeletonArt = R"(                                                                                                                         ::+xxx                                                                        

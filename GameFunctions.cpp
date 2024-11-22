@@ -163,9 +163,7 @@ void checkHealth(Player& player, stringstream& infoStream) {
 //Check rank(requirement for boss fight)
 void checkRank(Player& player, const vector<Boss>& bosses, const vector<Rank>& ranks, stringstream& infoStream) {
 	int currentRankIndex = -1;
-	for (size_t i = 0; i < ranks.size(); ++i) {
-		if (ranks[i].name == player.rank) { currentRankIndex = i; break; }
-	}
+	for (size_t i = 0; i < ranks.size(); ++i) { if (ranks[i].name == player.rank) { currentRankIndex = i; break; } }
 
 	if (player.rank == "BRONZE") { currentRankIndex = 0; /*Assume BRONZE is at index 0, move to index 1*/ }
 
@@ -240,9 +238,9 @@ void mainMenu(Player& player, vector<Weapon>& weapons, vector<Boss>& bosses, vec
 		if (bosses[5].beaten == true) {
 			infoStream << endGame;
 			textBoxClean(infoStream);
-			infoStream << finalSecret;
+			infoStream << "\033[0;33m" << finalSecret;
 			textBoxClean(infoStream);
-			infoStream << "The Abyss was no more, the Overlord vanquished, and the artifact now in your possession. The world above awaited you next move—one that would change everything.";
+			infoStream << "\033[1;31mThe Abyss was no more, the Overlord vanquished, and the artifact now in your possession. The world above awaited you next move—one that would change everything.";
 			textBoxClean(infoStream);
 			sleepAndIgnoreInput(10000);
 			exit(EXIT_FAILURE);
