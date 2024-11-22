@@ -29,7 +29,7 @@ int main() {
 	system("Color 0C");
 
 	//Start intro and input name
-	infoStream << gameTitleArt << endl << story;
+	infoStream << gameTitleArt << "\n" << story;
 	textBoxClean(infoStream);
 	cout << "What is your name ? ";
 	cin >> player.name;

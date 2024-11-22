@@ -13,4 +13,6 @@ extern const char* const minotaurArt;
 extern const char* const lichArt;
 extern const char* const overlordArt;
 extern const char* const noMoney;
+extern const char* const endGame;
+extern const char* const finalSecret;
 #endif //ASCII_H

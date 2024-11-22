@@ -75,9 +75,13 @@ R"(                                             .:+x$&&&&&&&&&&&&$x+xxx+xxxx:.:+
 
 //Short story
 const char* const story = R"(You are an adventurer in a vast world where dungeons hold untold treasures and unspeakable horrors. For years, whispers have circulated about the Abyss dungeon, a place where the earth
+
 itself seems to tremble, and the very darkness devours all light. No one has ever returned from its depths, but that has never stopped those daring enough to seek glory and power.
+
 You've trained for this moment your entire life, honing your skills as a warrior, mastering the use of Divine Art, and preparing to face whatever the Abyss throws at you.
+
 Your goal is simple: Enter the dungeon, face its horrors, and slay the Overlord an ancient being so powerful that even the gods tremble in fear at the thought of it.
+
 You stand before the entrance, the dungeon great stone door slowly creaks open, as if it has been waiting for you. The air is thick with the scent of decay and chill hangs in the air.)";
 
 //The Overlord speaks
@@ -85,6 +89,17 @@ const char* const bossSpeak = R"(Foolish mortal, you think your light will save 
 
 //Player dialog
 const char* const playerWin = R"(The light will never die, and neither will I.)";
+
+//Endgame dialog
+const char* const endGame = R"(You killed the Overlord. The dungeon's oppressive atmosphere began to dissipate, and the labyrinth of darkness around them started to crumble, as if it had no reason to exist without
+
+the Overlord's will to control it. Your hand trembled with anticipation as they stepped forward into the final chamber, where the artifact lay upon a pedestal bathed in an eerie, otherworldly glow.
+
+It was an ancient relic, pulsing with a power that could reshape the very fabric of reality. With a steady breath, your took it into their grasp, the weight of its significance overwhelming.
+
+In that moment, they knew their journey had come to an end.
+
+You found the artifact of the abyss!!!)";
 
 const char* const skeletonArt = R"(                                                                                                                         ::+xxx                                                                        
                                                                                                                 ;;;;;;;;:::::::;xxxxxXX                                                                
@@ -200,8 +215,7 @@ const char* const beholderArt = R"(                                             
                                                     :.............::.:....:                                             
                                                        +;::.......::... :                                               
                                                             ......   ..;                                                
-                                                              :.....                                                    
-)";
+                                                              :.....                                                    )";
 
 const char* const slimeArt = R"(                                                                               ++++     ;+++++++                                  xx+xxx                                                               
                                                                            +;;;;+xXXxxxxxXx+++                                +xxXXXxx++++;                                                            
@@ -261,8 +275,7 @@ const char* const slimeArt = R"(                                                
                                      ::.          .;;.. ..:..         ...:..        ...:..:...::;+++xXXXX+.              ..:::::;;;:.               :::::::..                         .         ;;+++  
                                           . ........   .:;;;;;;;;;::.                 ..::::::..........:;;+xxxxx;:.                    .:;::::::.                ..      ..      :;+++++++;;;;        
                                                          :.:...::::::::;.  .     :.::::::::::::::;:::        ::::::::;++++;;::.       .                                                  :::::::::     
-                                                                                                                            ....::;::;;                                                                
-)";
+                                                                                                                            ....::;::;;                                                                )";
 
 const char* const orcArt = R"(                                       x+x++;                                                
                                      +;;;+xx+;:                                              
@@ -323,8 +336,7 @@ const char* const orcArt = R"(                                       x+x++;
                 +...:::;:::::;                  :;::..:::.:+::;;:;                   ;:x     
                 :.:..::...;;::                       ;:.::::::::::                   x       
                ..:::.:::;;+;;:                         :::;;;;:::;                           
-               +;+++xx+;;;.:;                                                                
-)";
+               +;+++xx+;;;.:;                                                                )";
 
 const char* const minotaurArt = R"(                                                         :x                                  
                                                         ;.:X                                 
@@ -386,8 +398,7 @@ const char* const minotaurArt = R"(                                             
            . .   . ::.   .;                                                                  
                ........  .                                                                   
             :.......:...:                                                                    
-              ::;;;;:::                                                                      
-)";
+              ::;;;;:::                                                                      )";
 
 const char* const lichArt = R"(                 ;:                                                                                            
                   :;;                                                                                          
@@ -450,8 +461,7 @@ const char* const lichArt = R"(                 ;:
                        :.......     ............  ...      ..          .  .... .  ....    ......:::::;;++xxXXX 
                  ;++;:..........       ..............    .........  ......         ....         ..:;+xxxxxx    
                   xx+:;++;::..  ....  .......        ...   :. ......  ...:..  ... .    .  .....:.. ..:+xx      
-                  .;:::.:;;; .::::..:;        +                   x;.  ..::........     x:;;:..:;     xxxX     
-)";
+                  .;:::.:;;; .::::..:;        +                   x;.  ..::........     x:;;:..:;     xxxX     )";
 
 const char* const overlordArt = R"(                                              ;+            ::                                                 
                                              ::;            :.:                                                
@@ -512,8 +522,7 @@ XxXXXxxxXXx     +;+:;;;;;;++....::...:..:.::::;:;;:::;+::::.::....::....;:;:..:.
 .:;+:.::...::::...:::;+:::::::::::::::::::;;;x+:;:;;;;::::::::::......:::...::+;;:.::::+++;...:::::;;:;x$XXXX++
 ;;;::::::::::::::::;+;:::::::;::::::::::;;;+;:::;;;;;;:::::::::::....:::::..:::;::;::::;:.....:::.:::;::::;x+;;
 XxX$$X+:::::::::::;+;:::::::;;::::;;:::;;;;;::;;;;;;;;;:::::::::::::::::::::::::;:::::::........:..;;;:;;::.:::
-+++;;:::::::::::;+;::::;;::;;;;:;;;;;;;;;;;;;;;;;;;;;;;:::::;;:::::::::::::::::::;;:::::.........;x++x++xx+:::;
-)";
++++;;:::::::::::;+;::::;;::;;;;:;;;;;;;;;;;;;;;;;;;;;;;:::::;;:::::::::::::::::::;;:::::.........;x++x++xx+:::;)";
 
 const char* const noMoney = R"(           ............:................................................................::::::::::..
            ..........:::...............................................................::::::::::::.
@@ -574,3 +583,94 @@ const char* const noMoney = R"(           ............:.........................
                      .:..........::::::.:;+;;::..::;;;;.                                            
                      .:.    ....::;;;++;;..:;;:..::;;:.                                             
                      .:.      ....::::;;;;:::::..::;:.                                              )";
+
+const char* const finalSecret = R"(
+                                                                                                       &$$$$&
+                                                                                                      $$$$$$$&
+                                                                                                     xXX$$$$$$&
+                                                                                                   XX+xX$$$$$$&
+                                                                                                  x;+xX$$$$$$$$&
+                                                                                                 +;;xX$$$$$$$$$$&&
+                                                                                               +;:;xX$$$$$$$$$$$$$&
+                                                                                              ;;::x$$$$$$$$$$$$$$$&&
+                                                                                            +;:.;x$$$$$$$$$$$$$$$$$$&
+                                                                                           ;:::;x$$$$$$$$$$$$$$$$$$$$&
+                                                                                         X+:..;x$$$$$$$$$$$$$$$$$$$$$$$
+                                                                                         +:.:;x$$$$$$$$$$$$$$$$$$$$$$$$&
+                                                                                       +:..:;xX$$$$$$$$$$$$$$$$$$$$$$$$$$
+                                                                                      x...:;xX$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+                                                                                    $;...:;x$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$&
+                                                                                   x; ..:+xX$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+                                                                                 +;:...:+xX$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$&
+                                                                                 :....:;xX$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$&
+                                                                               ::....:;xX$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$&
+                                                                              :.....:;xX$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$&
+                                                                             ::....:;xX$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+                                                                            ;:...::;xX$$$X$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$&
+                                                                          +:....::;xX$$X$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+                                                                         +:...:::;xX$$X$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$&
+                                                                       X;:...:::;xX$$XXX$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$X$$
+                                                                      $+:..:::;;xX$$XxxXX$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$XX$XXXX$
+                                                                     X+:..::::;x$$$XXXxXXX$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$XXXXXXX$
+                                                                   X+;:..::::;x$$$$XXXXXXX$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$XXxXXXXX$
+                                                                  X+:..:::::;x$$$$XXXXXXXX$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$XXxxXXXXX$
+                                                                 +:::.:::::+x$$$$$XXXXXXXXX$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$XXXXXXXXXXX$
+                                                               $;:...:::::+X$$$$$$XXXXXXXXXX$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$XXXXXXXXXXXX$$
+                                                              $:....::::;+X$$$$$$$XXXXXXXXXX$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$XXXXXXXXXXXXXX$
+                                                             $:....::::;xX$$$$$$XX$XXXXXXXXXXX$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$XXXXXXXXXXXXXXXXX$
+                                                           X;::.::::::;x$$$$$$XXXX$$$XXXXXXXXXX$$$$$$$$$$$$$$$$$$$$$$$$$$$$$XXXXXXXXXXXXXXX$$X$
+                                                           ..::::::::+x$$$$$$$XX$$XXXXXXXXXXXXXXX$$$$$$$$$$$$$$$$$$$$$$$$$$XXXxxXXXXXXXXXXXXXXX$&
+                                                         X::::::::::+X$$$$$$$$$$$$XXXXXXXXXXXXXXX$$$$$$$$$$$$$$$$$$$$$$$$$$XXxxXXXXXXXXXXXXX$XX$$$
+                                                        +:::::::::;xX$$$$$$$XX$$$XXXXXXXXXXXXXXXXX$$$$$$$$$$$$$$$$$$$$$$$$$XXXxXXXXXXXXXXXXXX$XX$$$
+                                                      x+::::::..:+x$$$$$$$$XXXXXXXXXXXXXXXXXXXXXXXX$$$$$$$$$$$$$$$$$$$$$$$$XXXxXXXXXXXXXXXXX$XXXX$$$
+                                                     +;::::....:+X$$$$$$$$$XXXXXXXXXXXXXXXXXXXXXxxXX$$$$$$$$$$$$$$$$$$$$$$$XXXxXXXXXXXXXXXXXX$XXXXXX$
+                                                   x+;:::....:;xX$$$$$$$$xxxxXXXXXXXXXXXXXXXXXXXXxXXXX$$$$$$$$$$$$$$$$$$$$$XXXXXXXXXXXXXXXXXXXXXXXXXX$
+                                                  +;::::....:+X$$$$$$$$$Xxx+++xxxxxXXXXXXXXXXXXXXXxXXXXX$$$$$$$$$$$$$$$$$$$$XXXXXXXXXXXXXXXXXXXxx++++xX
+                                                 +;........;x$$$$$$$$$$$XXXXXXXxxx++++++xxxxxxxxxxxxxxXXXX$$$$$$$X$$$$$$$$$$XXxXXXXXxxxxxx+++;;++xxXXXX$
+                                                x:.......:;x$$$$$$$$$$$XXXXXXXXX$XXXXXXxxxx+++++++xxxxxXXXXXX$$$$$$$$$$$$$$XXXXxx+;++++xxxxxXXXXXXXXXXXX$
+                                              x:.......::+X$$$$$$$$$$$XXXXXXXXXXXXXXXXXXXXXXXXXxxxXXXxxxxxxXXX$$$$$$$$$$$$$$XXXXxxxxXXXXXXXXXXXXXXXXXXXXX$
+                                             x........:;xX$$$$$$$$$$$XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxxxxXXXXX$$$$$$$$$$$XXXXXXXXXXXXXXXXXXXXXXXXXXXXxX$
+                                            +:.......:+X$$$$$$$$$$$$XxxxXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxxXXXX$$$$$$$$$XXXXXXXXXXXXXXXXXXXXXXXXXXXXxxx$
+                                          $:.......:;xX$$$$$$$$$$$$XxxxxXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxxxXXXXXX$$$$$$XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxX
+                                         +;......::+xX$$$$$$$$$$$$XxxxxxXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxxxxxXXXXX$$$$XXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxxxX
+                                        :.......:;+X$$$$$$$$$$$$$Xxx+xxxxXXXXXXXXXXXxxxxxxxxxxxxxxxxXXXXXXXXXXXXXXXXXXXXXXXXXXXXxx++++++++++++xxXXXXXXxxxxx++xX
+                                      ;:.......:;xX$$$$$$$$$$$$$Xx;:::;;;;;++xxxxxxxx++++++++++x++xxXXXXXXXXXXXXXXXXXXXXXXXXXXXxx++++++++++++;;+++;;;;;:::::.;++
+                                     ;:.......;+xX$$$$$$$$$$$$$Xx;....   ......::::::::::::;;;;;;;;;+xXXXXXXXXXXXXXXXXXXXXXXXXx+;:::::::::........ ..      . .;xXX
+                                    ;:......:+xX$$$$$$$$$$$$$$$Xx+;;:. .:+++;.. ...............   ..:+xXXXXXXXXXXXXXXXXXXXXXXXx+;:. .;;++;.....:::......::::..;xxXX
+                                   :.. ....;xX$$$$$$$$$$$$$$$$$Xx++;;:.:+XXXx;:.::::::::::::::::...;xXXXXXXXXXXXXXXXXXXXXXXXXXXXx+..;xX$Xx;.::::::::::::::::..:+xX$
+                                  ;.  ...:+xX$$$$$$$$$$$$$$$$$Xxx+++;: :+xXx+:..:::::::::::::::::..;xXXXXXXXXXXXXXXXXXXXXXXXXXXXX+:.:+XXx+:.:::::::::::::::::..;xXX$
+                                +;:.....;xX$$$$$$$$$$$$$$$$$$$Xx+++++:  .:::..:::::::::::::::::::.:;xXXXXXXXXXXXXXXXXXXXXXXXXXXXXx;..:;;::.::::::::::::::::::..;+xX$$&
+                               +:.....:+x$$$$$$$$$$$$$$$$$$$$XXx++++;:. .....::::::::::::::::::::..;xXXXXXXXXXXXXXXXXXXXXXXXXXXXXX+:.......::::::::::::::::::..:+xXXX$&
+                             $+::...:;xX$$$$$$$$$$$$$$$$$$$$$Xx++++++:..:::::::::::::::::::::::::..;xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx;...::::::::::::::::::::::..:+xXXXX$&
+                            $+:...:;xXX$$$$$$$$$$$$$$$$$$$$$XXx++++++:..:::::::::::::::::::::::::. :xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx+:.::::::::::::::::::::::::.:;xxXXXX$&
+                            x::..:+xX$$$$$$$$$$$$$$$$$$$$$$$Xxx++++++:..:::::::::::::::::::::::::..;xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx;..:::::::::::::::::::::::..;+xXXXXX$
+                            x:::;+X$$XX$X$$$$$$$$$$$$$$$$X$$Xx+++++++;..:::::::::::::::::::::::::..;xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx;..:::::::::::::::::::::::..;+xXXXXXXX&
+                            X;:+xX$$$$$$$$$$$$$$$$$$$$$$$X$$Xx+++++++;:.:::::::::::::::::::::::::.:;xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx+:.:::::::::::::::::::::::..;+xXXXXXXX$$
+                             $xXX$$$$$$$$$$$$$$$$$$$$$$$$$XXxx+++++x+;:.:::::::::::::::::::::;:::.:+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx;..::::::::::::::::::::::.:;+xxXXXXXXXX$&
+                             $$$X$$$$$$$$$$$$$$$$$$$$$$$$$XXxx++++xx+;:.::::::::::::::::::::::::..;xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX+:..::::::::::::::::::::..:+xxxXXXXXXXX$&
+                             $XX$$$$$$$$$$$$$$$$$$$$$$$$$$XXxx++++xxx+:..::::::::::::::::::::::..:xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx;:.::::::::::::::::::::..;xxxxXXXXXXXXXXX&
+                             $$X$$$$$$$$$$$$$$$$$$$$$$$$$XXXxx++++xxx+;..::::::::::::::::::::::.:+xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx;:..:::::::::::::::::..:+xxxxxXXXXXXXXXXX$
+                              $$$$$$$$$$$$$$$$$$$$$$$$$$$XXxxx+++xxxxx+:..::::::::::::::::::::..;xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx+:...:::::::::::::::..;xxxxxxXXXXXXXXXXXX$
+                              $$$$$$$$$$$$$$$$$$$$$$$$$$XXXxx++++xxxxxx+:..::::::::::::::::::.:;xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx;::..::::::::::...:;xxXxxxxXXXXXXXXXXXXX$
+                              $$$$$$$$$$$$$$$$$$$$$$$$$$XXXxx++++xxxxxXx+:..::::::::::::::...:+xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxx+;::.........::;+xXXXxxxxxXXXXXXXXXXXXX&
+                              $$$$$$$$$$$$$$$$$$$$$XXX$$$XXxx+xxxxxxxXXXx+;:.......::......:;xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxx++;;;;;;;++xxXXXXXxxxxxXXXXXXXXXXXXXXX
+                              $$$$$$$$$$$$$$$$$$$$XXXX$$$XXxxxxxxxxxxXXXXxxx+;::......::;+xxXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxxxXXXXXXXXXXXXxxxxXXXXXXXXXXXXXxxX
+                              $$X$$$$$$$$$$$$$$$$$XXX$$XXXXxxxxxxxxxxxXXXXXXXXxx++++++xxXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxxxXX$XXXXXXXXXxxxxX
+                              $$$$$$$$$$$$$$$$$$$XXXX$$XXXXxxxxxxxxxxxXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxxxXX$XXXXXXXXXxxx++x
+                              &$$$$$$$$$$$$$$$$XXXXXX$$XXXXxxxxxxxxxxxXXXXXXXXXXXXXX$$XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxxxXXXXXXXXXXXxxx+++;X
+                               $$$$$$$$$$$$$$$XXXXXXX$$XXXXxxxxxxxxxxXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxxXXXXXXXXXXXxxx++;;;xx
+                               $$$$$$$$$$$$$$XXXXXXXX$$XXXXXxxxxxxxxxXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxXXXXXXXXXXXXxxx++;;;+xx
+                               $$$$$$$$$$$$$XxxxxXXXX$XXXXXXXxxxxxxxxXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxx+++;;;;;xx
+                               $$$$$$$$$$$$XxxxxxxXXXXXXXXXXXXXxxxxxXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxx++;;;;;;;+xX
+                               $$$$$$$$$$$XxxxxxxxxXXXXXXXXXXXXXXXxXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxxxXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxx++;;;;;;;;++xX
+                               $$$$$$$$$$Xx++xxxxxxxXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxxXXXXXXXXXXXXXXXXXXXXXxx+;+xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxx++;;;;;;;;++++x$
+                               $$$$$$$$$$xx++xxxxxxxxxXXXXXxxXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx++xxXXXXXXXXXXXXXXXXXxx+;;;+xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxx+++;;;;;;;;;;+++xX&
+                               &$$$$$$$$X+++++xxxxxxxxxxxxxxxXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxx+++++xxxxxxxxxxx++++++++xxXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxxx++;;;;;;;;;;;++++++X&
+                                $$$$$$$Xx++++++xxxxxxxx++++xxxxxXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxxxxxx+++++++++++xxxxxXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxx++;;;;;;;;;;;;++++++++X
+                                $$$$$$Xx+;+;;++++xxxxxx++++++xxxxxXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxxxxXxxXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxx++;;;;;;;;;;;;;;++++++++x$  
+                                &$$$$Xx+;;;;;;;;+++xxxxxx++++++xxxxxxxxxXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxXXXXxxxxx++;;;;;;;;;;;;;;;+xxxxxxxxX
+                                &$$$Xx+;;;;;;;;;;++++xxxxx++;+++++xxxxXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxXXxxxxX
+                                 $$Xx++++;;;;;;;;;;+++xxxxx++++++++++xxxxxXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX$
+                                 $$x++;;;;;;;;;;;;;;+++xxxxxxx+++;;;;;+++xxxxxxXXXXXXXXXXXXXXXXXXXXXXXXXXXXX$$
+                                 $Xx++;;;;;;;;;;;;;;;+++xxxxxxxxx++++++xxXXXXXXXXXXXXXXXX$$
+                                 $x++++++++xxxxxxxxxxXXXXX$XXXX)";

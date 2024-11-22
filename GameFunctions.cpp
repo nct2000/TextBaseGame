@@ -228,7 +228,7 @@ void mainMenu(Player& player, vector<Weapon>& weapons, vector<Boss>& bosses, vec
 
 		//Live check
 		if (player.live <= 0) {
-			infoStream << "You DIE!";
+			infoStream << "You DIED!";
 			textBoxClean(infoStream);
 			infoStream << skeletonArt;
 			textBoxClean(infoStream);
@@ -236,6 +236,19 @@ void mainMenu(Player& player, vector<Weapon>& weapons, vector<Boss>& bosses, vec
 			exit(EXIT_FAILURE);
 		}
 
+		//Overlord dead check
+		if (bosses[5].beaten == true) {
+			infoStream << endGame;
+			textBoxClean(infoStream);
+			infoStream << finalSecret;
+			textBoxClean(infoStream);
+			infoStream << "The Abyss was no more, the Overlord vanquished, and the artifact now in your possession. The world above awaited you next move—one that would change everything.";
+			textBoxClean(infoStream);
+			sleepAndIgnoreInput(10000);
+			exit(EXIT_FAILURE);
+		}
+
+		//Menu here
 		displayPlayerInfo(player, weapons, bosses, ranks, infoStream);
 		textBoxClean(infoStream); cout << "Action: ";
 
