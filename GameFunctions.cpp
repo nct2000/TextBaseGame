@@ -240,7 +240,7 @@ void mainMenu(Player& player, vector<Weapon>& weapons, vector<Boss>& bosses, vec
 			textBoxClean(infoStream);
 			infoStream << "\033[0;33m" << finalSecret;
 			textBoxClean(infoStream);
-			infoStream << "\033[1;31mThe Abyss was no more, the Overlord vanquished, and the artifact now in your possession. The world above awaited you next move—one that would change everything.";
+			infoStream << "\033[1;31mThe Abyss was no more, the Overlord vanquished, and the artifact now in your possession. The world above awaited you next move one that would change everything.";
 			textBoxClean(infoStream);
 			sleepAndIgnoreInput(10000);
 			exit(EXIT_FAILURE);
