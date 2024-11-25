@@ -18,7 +18,7 @@ int main() {
 	vector<Weapon> weapons = {{"DAGGER",8,50},{"SWORD",22,300},{"BOW",34,800},{"CLAYMORE",42,1500},{"CROSSBOW",56,3000},{"HALBELD",60,5000} };
 
 	//Boss info list
-	vector<Boss> bosses = {{"GIANT SLIME",3,"BRONZE",5,3,slimeArt},{"ORC CHIEF",5,"SILVER",10,5,orcArt},{"MINORTAURS",8,"GOLD",15,5,minotaurArt},{"BEHOLDER",10,"PLATINUM",20,6,beholderArt},{"LICH",15,"MYTHRIL",30,7,lichArt},{"THE OVERLORD",20,"ADAMANTITE",40,8,overlordArt}};
+	vector<Boss> bosses = {{"GIANT SLIME",3,"BRONZE",10,3,slimeArt},{"ORC CHIEF",5,"SILVER",18,5,orcArt},{"MINORTAURS",8,"GOLD",30,5,minotaurArt},{"BEHOLDER",10,"PLATINUM",50,6,beholderArt},{"LICH",15,"MYTHRIL",65,7,lichArt},{"THE OVERLORD",20,"ADAMANTITE",80,8,overlordArt}};
 
 	//Rank info list
 	vector<Rank> ranks = {{500,"SILVER"},{1000,"GOLD"},{3000,"PLATINUM"},{5000,"MYTHRIL"},{12000,"ADAMANTITE"}};
