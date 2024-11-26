@@ -21,7 +21,7 @@ int main() {
 	vector<Boss> bosses = {{"GIANT SLIME",3,"BRONZE",10,3,slimeArt},{"ORC CHIEF",5,"SILVER",18,5,orcArt},{"MINORTAURS",8,"GOLD",30,5,minotaurArt},{"BEHOLDER",10,"PLATINUM",50,6,beholderArt},{"LICH",15,"MYTHRIL",65,7,lichArt},{"THE OVERLORD",20,"ADAMANTITE",80,8,overlordArt}};
 
 	//Rank info list
-	vector<Rank> ranks = {{500,"SILVER"},{1000,"GOLD"},{3000,"PLATINUM"},{5000,"MYTHRIL"},{12000,"ADAMANTITE"}};
+	vector<Rank> ranks = {{500,"SILVER"},{1200,"GOLD"},{3500,"PLATINUM"},{5000,"MYTHRIL"},{12000,"ADAMANTITE"}};
 
 	//Player start stat
 	Player player;
