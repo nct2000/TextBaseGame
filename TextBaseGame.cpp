@@ -32,7 +32,7 @@ int main() {
 	infoStream << gameTitleArt << "\n" << story;
 	textBoxClean(infoStream);
 	cout << "What is your name ? ";
-	cin >> player.name;
+	getline(cin, player.name);
 
 
 	// Start the game loop
