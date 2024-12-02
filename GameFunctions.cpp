@@ -80,6 +80,30 @@ string stripAnsiCodes(const string& str) {
 	return regex_replace(str, regex("\033\\[[0-9;]*m"), "");
 }
 
+//Function to Maximize the window
+void maximizeConsoleWindow() {
+	HWND hwnd = GetConsoleWindow();  //Get the window handle of the console
+	ShowWindow(hwnd, SW_MAXIMIZE);   //Maximize the window
+}
+
+//Function to change font size
+void setConsoleFont(int fontSize) {
+	//Get the handle to the console
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
+	//Get the current console font info
+	CONSOLE_FONT_INFOEX cfi;
+	cfi.cbSize = sizeof(CONSOLE_FONT_INFOEX);
+	GetCurrentConsoleFontEx(hConsole, FALSE, &cfi);
+
+	//Set the font size
+	cfi.dwFontSize.X = fontSize; //X is the width, Y is the height
+	cfi.dwFontSize.Y = fontSize; //Y is the height of the font
+
+	//Set the new font
+	SetCurrentConsoleFontEx(hConsole, FALSE, &cfi);
+}
+
 //Function to create a text box around the input text
 void textBox(const string& text) {
 	stringstream ss(text);

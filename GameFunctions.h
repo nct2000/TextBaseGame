@@ -7,6 +7,8 @@
 #include "Ascii.h"
 
 // Function declarations
+void maximizeConsoleWindow();
+void setConsoleFont(int fontSize);
 void textBox(const string& text);
 void textBoxClean(stringstream& infoStream);
 void displayWeapons(const vector<Weapon>& weapons, stringstream& infoStream);

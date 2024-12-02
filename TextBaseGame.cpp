@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <sstream>
+#include <windows.h>
 #include "Player.h"
 #include "Weapon.h"
 #include "Rank.h"
@@ -12,6 +13,8 @@
 using namespace std;
 
 int main() {
+	maximizeConsoleWindow();
+	setConsoleFont(12);
 	stringstream infoStream;
 
 	//Weapon info list
