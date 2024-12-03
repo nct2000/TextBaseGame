@@ -376,7 +376,7 @@ void fight(Player& player, vector<Weapon>& weapons) {
 
 	//Update player money and energy after the fight
 	player.money += enemiesKilled * 15;
-	player.energy -= enemiesKilled * 2;
+	player.energy -= enemiesKilled * 1.5;
 
 	if (player.energy < 0) { player.energy = 0; }
 
@@ -385,7 +385,7 @@ void fight(Player& player, vector<Weapon>& weapons) {
 	textBoxClean(infoStream);
 
 	//Random damage to limb
-	if (rand() % 100 < 40) { string* limbs[] = { &player.l_a, &player.r_a, &player.l_l, &player.r_l }; *limbs[rand() % 4] = "Damaged"; }
+	if (rand() % 100 < 35) { string* limbs[] = { &player.l_a, &player.r_a, &player.l_l, &player.r_l }; *limbs[rand() % 4] = "Damaged"; }
 	checkHealth(player, infoStream);
 	sleepAndIgnoreInput(1000);
 }
@@ -421,7 +421,7 @@ void bossfight(Player& player, vector<Weapon>& weapons, vector<Boss>& bosses, ve
 	static int bossMaxHP = currentBoss.hp;
 	if (currentBoss.hp == bossMaxHP) { player.combo = 0; }
 
-	//Handle to handle rank promotion
+	//Handle rank promotion
 	auto handlePromoteRank = [&]() {
 		int currentRankIndex = -1;
 		for (size_t i = 0; i < ranks.size(); ++i) { if (ranks[i].name == player.rank) { currentRankIndex = i; break; } }
@@ -438,7 +438,30 @@ void bossfight(Player& player, vector<Weapon>& weapons, vector<Boss>& bosses, ve
 		}
 		};
 
-	//Handle to handle boss defeat
+	//Function to handle the loop after a successful attack
+	auto continueBossFight = [&]() {
+		moveCursorToPosition(0, 12);
+		infoStream << "Press Enter to continue the fight...\n";
+		textBoxClean(infoStream);
+
+		//Wait for the player to press Enter
+		while (true) {
+			if (_kbhit()) {
+				char ch = _getch();
+				if (ch == 13) { //Enter key pressed
+					// Clear the message after the player presses Enter
+					moveCursorToPosition(0, 12);
+					cout << "                                         \n";
+					cout << "                                         \n";
+					cout << "                                         ";
+					break;
+				}
+			}
+			sleep_for(milliseconds(50));
+		}
+		};
+
+	//Handle boss defeat
 	auto handleBossDefeat = [&]() {
 		moveCursorToPosition(0, 12);
 		player.combo = 0;
@@ -520,13 +543,17 @@ void bossfight(Player& player, vector<Weapon>& weapons, vector<Boss>& bosses, ve
 						moveCursorToPosition(0, 8);
 						infoStream << "You deal \033[32m" << dmg << " \033[1;31mdamage to the boss!";
 						textBoxClean(infoStream);
-						if (currentBoss.hp <= 0) { handleBossDefeat(); }
+						if (currentBoss.hp <= 0) { handleBossDefeat(); break; }
 						handleText();
 					}
 				}
 			}
-			sleepAndIgnoreInput(5000);
-			break;
+			sleepAndIgnoreInput(3000);
+			//If the boss is still alive, prompt the player to continue
+			if (currentBoss.hp > 0) {
+				sleepAndIgnoreInput(1000);
+				continueBossFight(); //Wait for Enter to continue the fight
+			}
 		}
 		else { infoStream << "Time's up! You failed to damage the boss in time.\n"; textBoxClean(infoStream); sleepAndIgnoreInput(5000); player.live -= 1; player.combo = 0; break; }
 	}
